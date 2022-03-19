@@ -17,5 +17,30 @@ app.post("/criar", (req, res) => {
         if (err) throw err;
     });
 });
+```
 
-- POST 
+- Data submitting with fetch API
+```javascript
+fetch("http://localhost:3001/criar", {method:"POST", headers:{'Accept': 'application/json','Content-Type': 'application/json'},body:JSON.stringify({
+    autor: document.querySelector("#input").value
+})});
+```
+#
+- GET Route
+```javascript
+app.get("/autores", (req, res) => {
+    mongodb.database.collection("autores").find().toArray((error, results)=>{
+        if (error) throw error;
+        res.send(results);
+    })
+});
+```
+
+- Getting data with fetch API
+```javascript
+fetch("http://localhost:3001/autores").then(res => res.json())
+.then(items => {
+    items.map(item => {
+        document.querySelector("#container").innerHTML += `<br/> ${item.nome}`;
+    })
+})
