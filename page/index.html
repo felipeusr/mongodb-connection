@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Mongodb Connection</title>
+    </head>
+    <body>
+        <input id="input" type="text">
+        <button onclick="enviar()">Enviar</button>
+        <div id="container"></div>
+        
+        <script>
+            function enviar() {
+                fetch("http://localhost:3001/criar", {method:"POST", headers:{'Accept': 'application/json','Content-Type': 'application/json'},body:JSON.stringify({
+                    autor: document.querySelector("#input").value
+                })});
+                find();
+            }
+            window.onload = () => {
+                fetch("http://localhost:3001/autores").then(res => res.json())
+                .then(items => {
+                    items.map(item => {
+                        document.querySelector("#container").innerHTML += `<br/> ${item.nome}`;
+                    })
+                })
+            }
+        </script>
+
+    </body>
+</html>
