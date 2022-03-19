@@ -16,7 +16,6 @@
                 fetch("http://localhost:3001/criar", {method:"POST", headers:{'Accept': 'application/json','Content-Type': 'application/json'},body:JSON.stringify({
                     autor: document.querySelector("#input").value
                 })});
-                find();
             }
             window.onload = () => {
                 fetch("http://localhost:3001/autores").then(res => res.json())
